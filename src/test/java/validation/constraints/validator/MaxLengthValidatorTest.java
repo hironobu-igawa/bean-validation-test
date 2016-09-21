@@ -11,7 +11,7 @@ import org.junit.Test;
 import validation.constraints.MaxLength;
 
 /**
- * Tests MaxlengthValidator.
+ * Tests MaxLengthValidator.
  * @author hironobu-igawa
  */
 public class MaxLengthValidatorTest extends ValidatorTest {

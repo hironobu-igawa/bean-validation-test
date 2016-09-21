@@ -11,7 +11,7 @@ import org.junit.Test;
 import validation.constraints.MinLength;
 
 /**
- * Tests MinlengthValidator.
+ * Tests MinLengthValidator.
  * @author hironobu-igawa
  */
 public class MinLengthValidatorTest extends ValidatorTest {

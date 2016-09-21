@@ -10,7 +10,7 @@ import validation.constraints.MaxLength;
  * Verify to be the element value length is the maximum value and under.
  * @author hironobu-igawa
  */
-public class MaxlengthValidator implements ConstraintValidator<MaxLength, String> {
+public class MaxLengthValidator implements ConstraintValidator<MaxLength, String> {
     private MaxLength maxLength;
 
     @Override

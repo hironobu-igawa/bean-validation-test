@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import validation.constraints.validator.MaxlengthValidator;
+import validation.constraints.validator.MaxLengthValidator;
 
 /**
  * The annotated element length must be maximum value and under.
@@ -24,7 +24,7 @@ import validation.constraints.validator.MaxlengthValidator;
     ElementType.PARAMETER
 })
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy={MaxlengthValidator.class})
+@Constraint(validatedBy={MaxLengthValidator.class})
 @Documented
 public @interface MaxLength {
     /**
