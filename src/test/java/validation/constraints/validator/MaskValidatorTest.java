@@ -21,7 +21,7 @@ public class MaskValidatorTest extends ValidatorTest {
     @Test
     public void testMatch() {
         TestBean bean = new TestBean();
-        bean.userId = "Zin920314";
+        bean.mask = "abc123";
 
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
@@ -34,12 +34,12 @@ public class MaskValidatorTest extends ValidatorTest {
     @Test
     public void testUnmatch() {
         TestBean bean = new TestBean();
-        bean.userId = "井川拓信";
+        bean.mask = "Abc123";
 
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
         assertEquals(violations.size(), 1);
-        assertEquals(violations.iterator().next().getMessage(), "Please enter User ID in alphanumeric only.");
+        assertEquals(violations.iterator().next().getMessage(), "Mask constraint violation. label: Mask");
     }
 
     /**
@@ -48,7 +48,7 @@ public class MaskValidatorTest extends ValidatorTest {
     @Test
     public void testBlank() {
         TestBean bean = new TestBean();
-        bean.userId = " ";
+        bean.mask = " ";
 
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
@@ -61,7 +61,7 @@ public class MaskValidatorTest extends ValidatorTest {
     @Test
     public void testNull() {
         TestBean bean = new TestBean();
-        bean.userId = null;
+        bean.mask = null;
 
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
@@ -69,7 +69,7 @@ public class MaskValidatorTest extends ValidatorTest {
     }
 
     private static class TestBean {
-        @Mask(regexp="^[a-zA-Z0-9]*$", message="MASK.ALPHANUMERIC.ONLY", label="label.user.id")
-        public String userId;
+        @Mask(regexp="^[a-z0-9]*$", message="MASK", label="label.mask")
+        public String mask;
     }
 }
