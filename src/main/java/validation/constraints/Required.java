@@ -30,25 +30,25 @@ import validation.constraints.validator.RequiredValidator;
 public @interface Required {
     /**
      * Return the message template key.
-     * @return message template key
+     * @return Message template key.
      */
     String message() default "";
 
     /**
      * Return the label key.
-     * @return label key
+     * @return Label key.
      */
     String label() default "";
 
     /**
      * Return the groups.
-     * @return groups
+     * @return Groups.
      */
     Class<?>[] groups() default {};
 
     /**
-     * Return the payload
-     * @return payload
+     * Return the payload.
+     * @return Payload.
      */
     Class<? extends Payload>[] payload() default {};
 }
