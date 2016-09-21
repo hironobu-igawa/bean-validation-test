@@ -1,4 +1,4 @@
-package validation.constraints;
+package validation.constraints.validator;
 
 import java.util.Set;
 

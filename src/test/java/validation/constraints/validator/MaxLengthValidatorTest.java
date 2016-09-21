@@ -1,4 +1,4 @@
-package validation.constraints;
+package validation.constraints.validator;
 
 import static org.junit.Assert.assertEquals;
 
@@ -8,18 +8,20 @@ import javax.validation.ConstraintViolation;
 
 import org.junit.Test;
 
+import validation.constraints.MaxLength;
+
 /**
- * Tests MaskValidator.
+ * Tests MaxlengthValidator.
  * @author hironobu-igawa
  */
-public class MaskValidatorTest extends ValidationTest {
+public class MaxLengthValidatorTest extends ValidationTest {
     /**
-     * Tests match pattern.
+     * Tests "less than" pattern.
      */
     @Test
-    public void testMatch() {
+    public void testLessThan() {
         TestBean bean = new TestBean();
-        bean.userId = "Zin920314";
+        bean.maxlength = "12345";
 
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
@@ -27,17 +29,30 @@ public class MaskValidatorTest extends ValidationTest {
     }
 
     /**
-     * Tests unmatch pattern.
+     * Tests "equals" pattern.
      */
     @Test
-    public void testUnmatch() {
+    public void testEquals() {
         TestBean bean = new TestBean();
-        bean.userId = "井川拓信";
+        bean.maxlength = "123456";
+
+        Set<ConstraintViolation<TestBean>> violations = validate(bean);
+
+        assertEquals(violations.size(), 0);
+    }
+
+    /**
+     * Tests "greater than" pattern.
+     */
+    @Test
+    public void testGreaterThan() {
+        TestBean bean = new TestBean();
+        bean.maxlength = "1234567";
 
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
         assertEquals(violations.size(), 1);
-        assertEquals(violations.iterator().next().getMessage(), "Please enter User ID in alphanumeric only.");
+        assertEquals(violations.iterator().next().getMessage(), "MaxLength constraint violation. label: maxlength, max: 6");
     }
 
     /**
@@ -46,7 +61,7 @@ public class MaskValidatorTest extends ValidationTest {
     @Test
     public void testBlank() {
         TestBean bean = new TestBean();
-        bean.userId = " ";
+        bean.maxlength = " ";
 
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
@@ -59,7 +74,7 @@ public class MaskValidatorTest extends ValidationTest {
     @Test
     public void testNull() {
         TestBean bean = new TestBean();
-        bean.userId = null;
+        bean.maxlength = null;
 
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
@@ -67,7 +82,7 @@ public class MaskValidatorTest extends ValidationTest {
     }
 
     private static class TestBean {
-        @Mask(regexp="^[a-zA-Z0-9]*$", message="MASK.ALPHANUMERIC.ONLY", label="label.user.id")
-        public String userId;
+        @MaxLength(max=6, message="MAXLENGTH", label="label.maxlength")
+        public String maxlength;
     }
 }

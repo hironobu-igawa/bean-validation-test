@@ -1,4 +1,4 @@
-package validation.constraints;
+package validation.constraints.validator;
 
 import static org.junit.Assert.assertEquals;
 

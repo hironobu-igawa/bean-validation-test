@@ -1,4 +1,4 @@
-package validation.constraints;
+package validation.constraints.validator;
 
 import static org.junit.Assert.assertEquals;
 
@@ -8,18 +8,20 @@ import javax.validation.ConstraintViolation;
 
 import org.junit.Test;
 
+import validation.constraints.Mask;
+
 /**
- * Tests MinlengthValidator.
+ * Tests MaskValidator.
  * @author hironobu-igawa
  */
-public class MinLengthValidatorTest extends ValidationTest {
+public class MaskValidatorTest extends ValidationTest {
     /**
-     * Tests "greater than" pattern.
+     * Tests match pattern.
      */
     @Test
-    public void testGreaterThan() {
+    public void testMatch() {
         TestBean bean = new TestBean();
-        bean.minlength = "1234567";
+        bean.userId = "Zin920314";
 
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
@@ -27,30 +29,17 @@ public class MinLengthValidatorTest extends ValidationTest {
     }
 
     /**
-     * Tests "equals" pattern.
+     * Tests unmatch pattern.
      */
     @Test
-    public void testEquals() {
+    public void testUnmatch() {
         TestBean bean = new TestBean();
-        bean.minlength = "123456";
-
-        Set<ConstraintViolation<TestBean>> violations = validate(bean);
-
-        assertEquals(violations.size(), 0);
-    }
-
-    /**
-     * Tests "less than" pattern.
-     */
-    @Test
-    public void testLessThan() {
-        TestBean bean = new TestBean();
-        bean.minlength = "12345";
+        bean.userId = "井川拓信";
 
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
         assertEquals(violations.size(), 1);
-        assertEquals(violations.iterator().next().getMessage(), "MinLength constraint violation. label: minlength, min: 6");
+        assertEquals(violations.iterator().next().getMessage(), "Please enter User ID in alphanumeric only.");
     }
 
     /**
@@ -59,7 +48,7 @@ public class MinLengthValidatorTest extends ValidationTest {
     @Test
     public void testBlank() {
         TestBean bean = new TestBean();
-        bean.minlength = " ";
+        bean.userId = " ";
 
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
@@ -72,7 +61,7 @@ public class MinLengthValidatorTest extends ValidationTest {
     @Test
     public void testNull() {
         TestBean bean = new TestBean();
-        bean.minlength = null;
+        bean.userId = null;
 
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
@@ -80,7 +69,7 @@ public class MinLengthValidatorTest extends ValidationTest {
     }
 
     private static class TestBean {
-        @MinLength(min=6, message="MINLENGTH", label="label.minlength")
-        public String minlength;
+        @Mask(regexp="^[a-zA-Z0-9]*$", message="MASK.ALPHANUMERIC.ONLY", label="label.user.id")
+        public String userId;
     }
 }

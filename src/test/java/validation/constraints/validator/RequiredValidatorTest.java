@@ -1,4 +1,4 @@
-package validation.constraints;
+package validation.constraints.validator;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,6 +7,8 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 
 import org.junit.Test;
+
+import validation.constraints.Required;
 
 /**
  * Test RequiredValidator.

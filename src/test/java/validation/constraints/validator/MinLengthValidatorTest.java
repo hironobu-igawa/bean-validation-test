@@ -1,4 +1,4 @@
-package validation.constraints;
+package validation.constraints.validator;
 
 import static org.junit.Assert.assertEquals;
 
@@ -8,18 +8,20 @@ import javax.validation.ConstraintViolation;
 
 import org.junit.Test;
 
+import validation.constraints.MinLength;
+
 /**
- * Tests MaxlengthValidator.
+ * Tests MinlengthValidator.
  * @author hironobu-igawa
  */
-public class MaxLengthValidatorTest extends ValidationTest {
+public class MinLengthValidatorTest extends ValidationTest {
     /**
-     * Tests "less than" pattern.
+     * Tests "greater than" pattern.
      */
     @Test
-    public void testLessThan() {
+    public void testGreaterThan() {
         TestBean bean = new TestBean();
-        bean.maxlength = "12345";
+        bean.minlength = "1234567";
 
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
@@ -32,7 +34,7 @@ public class MaxLengthValidatorTest extends ValidationTest {
     @Test
     public void testEquals() {
         TestBean bean = new TestBean();
-        bean.maxlength = "123456";
+        bean.minlength = "123456";
 
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
@@ -40,17 +42,17 @@ public class MaxLengthValidatorTest extends ValidationTest {
     }
 
     /**
-     * Tests "greater than" pattern.
+     * Tests "less than" pattern.
      */
     @Test
-    public void testGreaterThan() {
+    public void testLessThan() {
         TestBean bean = new TestBean();
-        bean.maxlength = "1234567";
+        bean.minlength = "12345";
 
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
         assertEquals(violations.size(), 1);
-        assertEquals(violations.iterator().next().getMessage(), "MaxLength constraint violation. label: maxlength, max: 6");
+        assertEquals(violations.iterator().next().getMessage(), "MinLength constraint violation. label: minlength, min: 6");
     }
 
     /**
@@ -59,7 +61,7 @@ public class MaxLengthValidatorTest extends ValidationTest {
     @Test
     public void testBlank() {
         TestBean bean = new TestBean();
-        bean.maxlength = " ";
+        bean.minlength = " ";
 
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
@@ -72,7 +74,7 @@ public class MaxLengthValidatorTest extends ValidationTest {
     @Test
     public void testNull() {
         TestBean bean = new TestBean();
-        bean.maxlength = null;
+        bean.minlength = null;
 
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
@@ -80,7 +82,7 @@ public class MaxLengthValidatorTest extends ValidationTest {
     }
 
     private static class TestBean {
-        @MaxLength(max=6, message="MAXLENGTH", label="label.maxlength")
-        public String maxlength;
+        @MinLength(min=6, message="MINLENGTH", label="label.minlength")
+        public String minlength;
     }
 }
