@@ -11,7 +11,7 @@ import javax.validation.ValidatorFactory;
  * Validation test superclass.
  * @author hironobu-igawa
  */
-public abstract class ValidationTest {
+public abstract class ValidatorTest {
     /**
      * Validates all constraints on user.
      * @return constraint violations or an empty set if none

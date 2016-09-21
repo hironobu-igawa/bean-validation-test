@@ -13,7 +13,7 @@ import validation.constraints.Required;
  * Tests ReuquiredStringValidator.
  * @author hironobu-igawa
  */
-public class RequiredStringValidatorTest extends ValidationTest {
+public class RequiredStringValidatorTest extends ValidatorTest {
     /**
      * Tests the normal pattern.
      */

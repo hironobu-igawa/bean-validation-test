@@ -14,7 +14,7 @@ import validation.constraints.Mask;
  * Tests MaskValidator.
  * @author hironobu-igawa
  */
-public class MaskValidatorTest extends ValidationTest {
+public class MaskValidatorTest extends ValidatorTest {
     /**
      * Tests match pattern.
      */

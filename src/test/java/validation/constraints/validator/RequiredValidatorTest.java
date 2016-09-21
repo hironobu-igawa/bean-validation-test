@@ -14,7 +14,7 @@ import validation.constraints.Required;
  * Test RequiredValidator.
  * @author h_igawa
  */
-public class RequiredValidatorTest extends ValidationTest {
+public class RequiredValidatorTest extends ValidatorTest {
     /**
      * Tests the normal pattern.
      */

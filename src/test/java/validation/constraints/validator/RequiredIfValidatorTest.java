@@ -14,7 +14,7 @@ import validation.constraints.RequiredIf;
  * Tests RequiredIfValidator
  * @author hironobu-igawa
  */
-public class RequiredIfValidatorTest extends ValidationTest {
+public class RequiredIfValidatorTest extends ValidatorTest {
     /**
      * Tests input normal pattern.
      */

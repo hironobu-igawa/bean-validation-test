@@ -14,7 +14,7 @@ import validation.constraints.MinLength;
  * Tests MinlengthValidator.
  * @author hironobu-igawa
  */
-public class MinLengthValidatorTest extends ValidationTest {
+public class MinLengthValidatorTest extends ValidatorTest {
     /**
      * Tests "greater than" pattern.
      */

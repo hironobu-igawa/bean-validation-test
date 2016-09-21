@@ -14,7 +14,7 @@ import validation.constraints.MaxLength;
  * Tests MaxlengthValidator.
  * @author hironobu-igawa
  */
-public class MaxLengthValidatorTest extends ValidationTest {
+public class MaxLengthValidatorTest extends ValidatorTest {
     /**
      * Tests "less than" pattern.
      */
