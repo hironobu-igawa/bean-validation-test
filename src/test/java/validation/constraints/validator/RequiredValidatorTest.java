@@ -16,39 +16,34 @@ import validation.constraints.Required;
  */
 public class RequiredValidatorTest extends ValidatorTest {
     /**
-     * Tests the normal pattern.
+     * Tests valid pattern.
      */
     @Test
-    public void testNormal() {
-        class Bean {
-            @Required(message="REQUIRED", label = "label.point")
-            public Integer point;
-        }
-
+    public void testValid() {
         Bean bean = new Bean();
-        bean.point = 10;
+        bean.required = 10;
 
         Set<ConstraintViolation<Bean>> violations = validate(bean);
 
-        assertEquals(violations.size(), 0);
+        assertEquals(0, violations.size());
     }
 
     /**
-     * Tests the null error pattern.
+     * Tests null pattern.
      */
     @Test
-    public void testNullError() {
-        class Bean {
-            @Required(message="REQUIRED", label = "label.point")
-            public Integer point;
-        }
-
+    public void testNull() {
         Bean bean = new Bean();
-        bean.point = null;
+        bean.required = null;
 
         Set<ConstraintViolation<Bean>> violations = validate(bean);
 
-        assertEquals(violations.size(), 1);
-        assertEquals(violations.iterator().next().getMessage(), "Please enter Point.");
+        assertEquals(1, violations.size());
+        assertEquals("Required constraint violation. label: Required", violations.iterator().next().getMessage());
+    }
+
+    private static class Bean {
+        @Required(message="REQUIRED", label = "label.required")
+        public Integer required;
     }
 }

@@ -15,58 +15,48 @@ import validation.constraints.Required;
  */
 public class RequiredStringValidatorTest extends ValidatorTest {
     /**
-     * Tests the normal pattern.
+     * Tests valid pattern.
      */
     @Test
-    public void testNormal() {
-        class Bean {
-            @Required(message="REQUIRED", label="label.name")
-            public String name;
-        }
+    public void testValid() {
+        TestBean bean = new TestBean();
+        bean.required = "a";
 
-        Bean bean = new Bean();
-        bean.name = "Hironobu";
+        Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
-        Set<ConstraintViolation<Bean>> violations = validate(bean);
-
-        assertEquals(violations.size(), 0);
+        assertEquals(0, violations.size());
     }
 
     /**
-     * Tests the null error pattern.
+     * Tests blank pattern.
      */
     @Test
-    public void testNullError() {
-        class Bean {
-            @Required(message="REQUIRED", label = "label.name")
-            public String name;
-        }
+    public void testBlank() {
+        TestBean bean = new TestBean();
+        bean.required = " ";
 
-        Bean bean = new Bean();
-        bean.name = null;
+        Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
-        Set<ConstraintViolation<Bean>> violations = validate(bean);
-
-        assertEquals(violations.size(), 1);
-        assertEquals(violations.iterator().next().getMessage(), "Please enter Name.");
+        assertEquals(1, violations.size());
+        assertEquals("Required constraint violation. label: Required", violations.iterator().next().getMessage());
     }
 
     /**
-     * Tests the blank error pattern.
+     * Tests null pattern.
      */
     @Test
-    public void testBlankError() {
-        class Bean {
-            @Required(message="REQUIRED", label = "label.name")
-            public String name;
-        }
+    public void testNull() {
+        TestBean bean = new TestBean();
+        bean.required = null;
 
-        Bean bean = new Bean();
-        bean.name = " ";
-
-        Set<ConstraintViolation<Bean>> violations = validate(bean);
+        Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
         assertEquals(violations.size(), 1);
-        assertEquals(violations.iterator().next().getMessage(), "Please enter Name.");
+        assertEquals("Required constraint violation. label: Required", violations.iterator().next().getMessage());
+    }
+
+    private static class TestBean {
+        @Required(message="REQUIRED", label = "label.required")
+        public String required;
     }
 }
