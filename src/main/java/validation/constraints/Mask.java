@@ -35,7 +35,7 @@ public @interface Mask {
 
     /**
      * Return the message template key.
-     * @return Message template key
+     * @return Message template key.
      */
     String message() default "";
 
