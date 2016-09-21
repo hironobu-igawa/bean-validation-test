@@ -25,7 +25,7 @@ public class MaskValidatorTest extends ValidatorTest {
 
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
-        assertEquals(violations.size(), 0);
+        assertEquals(0, violations.size());
     }
 
     /**
@@ -38,8 +38,8 @@ public class MaskValidatorTest extends ValidatorTest {
 
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
-        assertEquals(violations.size(), 1);
-        assertEquals(violations.iterator().next().getMessage(), "Mask constraint violation. label: Mask");
+        assertEquals(1, violations.size());
+        assertEquals("Mask constraint violation. label: Mask", violations.iterator().next().getMessage());
     }
 
     /**
@@ -52,7 +52,7 @@ public class MaskValidatorTest extends ValidatorTest {
 
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
-        assertEquals(violations.size(), 0);
+        assertEquals(0, violations.size());
     }
 
     /**
@@ -65,7 +65,7 @@ public class MaskValidatorTest extends ValidatorTest {
 
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
-        assertEquals(violations.size(), 0);
+        assertEquals(0, violations.size());
     }
 
     private static class TestBean {

@@ -25,7 +25,7 @@ public class MaxLengthValidatorTest extends ValidatorTest {
 
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
-        assertEquals(violations.size(), 0);
+        assertEquals(0, violations.size());
     }
 
     /**
@@ -38,7 +38,7 @@ public class MaxLengthValidatorTest extends ValidatorTest {
 
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
-        assertEquals(violations.size(), 0);
+        assertEquals(0, violations.size());
     }
 
     /**
@@ -51,8 +51,8 @@ public class MaxLengthValidatorTest extends ValidatorTest {
 
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
-        assertEquals(violations.size(), 1);
-        assertEquals(violations.iterator().next().getMessage(), "MaxLength constraint violation. label: maxlength, max: 6");
+        assertEquals(1, violations.size());
+        assertEquals("MaxLength constraint violation. label: maxlength, max: 6", violations.iterator().next().getMessage());
     }
 
     /**
@@ -65,7 +65,7 @@ public class MaxLengthValidatorTest extends ValidatorTest {
 
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
-        assertEquals(violations.size(), 0);
+        assertEquals(0, violations.size());
     }
 
     /**
@@ -78,7 +78,7 @@ public class MaxLengthValidatorTest extends ValidatorTest {
 
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
-        assertEquals(violations.size(), 0);
+        assertEquals(0, violations.size());
     }
 
     private static class TestBean {

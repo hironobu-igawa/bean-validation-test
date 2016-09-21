@@ -25,7 +25,7 @@ public class EmailValidatorTest extends ValidatorTest {
 
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
-        assertEquals(violations.size(), 0);
+        assertEquals(0, violations.size());
     }
 
     /**
@@ -38,8 +38,8 @@ public class EmailValidatorTest extends ValidatorTest {
 
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
-        assertEquals(violations.size(), 1);
-        assertEquals(violations.iterator().next().getMessage(), "Email constraint violation. label: Email");
+        assertEquals(1, violations.size());
+        assertEquals("Email constraint violation. label: Email", violations.iterator().next().getMessage());
     }
 
     /**
@@ -52,7 +52,7 @@ public class EmailValidatorTest extends ValidatorTest {
 
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
-        assertEquals(violations.size(), 0);
+        assertEquals(0, violations.size());
     }
 
     /**
@@ -65,7 +65,7 @@ public class EmailValidatorTest extends ValidatorTest {
 
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
-        assertEquals(violations.size(), 0);
+        assertEquals(0, violations.size());
     }
 
     private static class TestBean {
