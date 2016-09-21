@@ -16,56 +16,56 @@ import validation.constraints.RequiredIf;
  */
 public class RequiredIfValidatorTest extends ValidatorTest {
     /**
-     * Tests input normal pattern.
+     * Tests valid pattern.
      */
     @Test
-    public void testInputNormal() {
+    public void testValid() {
         TestBean bean = new TestBean();
-        bean.password1 = "Passw0rd!";
-        bean.password2 = "Passw0rd!";
+        bean.required1 = "a";
+        bean.required2 = "a";
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
-        assertEquals(violations.size(), 0);
+        assertEquals(0, violations.size());
     }
 
     /**
-     * Tests not imput normal pattern.
+     * Tests invalid pattern.
      */
     @Test
-    public void testNotImputNormal() {
+    public void testInvalid() {
         TestBean bean = new TestBean();
-        bean.password1 = null;
-        bean.password2 = "Passw0rd!";
+        bean.required1 = "a";
+        bean.required2 = "b";
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
-        assertEquals(violations.size(), 0);
+        assertEquals(1, violations.size());
+        assertEquals("RequiredIf constraint violation. labels: [RequiredIf1, RequiredIf2]", violations.iterator().next().getMessage());
     }
 
     /**
-     * Tests error pattern.
+     * Tests null pattern.
      */
     @Test
-    public void testError() {
+    public void test() {
         TestBean bean = new TestBean();
-        bean.password1 = "PasswOrd1";
-        bean.password2 = "Passw0rd!";
+        bean.required1 = null;
+        bean.required2 = "b";
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
-        assertEquals(violations.size(), 1);
-        assertEquals(violations.iterator().next().getMessage(), "Please match New password and Confirm password.");
+        assertEquals(0, violations.size());
     }
 
     private static class TestBean {
-        public String password1;
-        public String password2;
+        public String required1;
+        public String required2;
 
-        @RequiredIf(message="MATCH.VALUES", labels={"label.password1", "label.password2"})
+        @RequiredIf(message="REQUIREDIF", labels={"label.requiredif1", "label.requiredif2"})
         public boolean isValidMatchPassword() {
-            if (password1 == null || password2 == null) {
+            if (required1 == null || required2 == null) {
                 return true;
             }
 
-            return password1.equals(password2);
+            return required1.equals(required2);
         }
     }
 }
