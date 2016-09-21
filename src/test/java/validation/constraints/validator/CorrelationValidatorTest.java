@@ -8,21 +8,21 @@ import javax.validation.ConstraintViolation;
 
 import org.junit.Test;
 
-import validation.constraints.RequiredIf;
+import validation.constraints.CorrelationValid;
 
 /**
- * Tests RequiredIfValidator
+ * Tests CorrelationValidator
  * @author hironobu-igawa
  */
-public class RequiredIfValidatorTest extends ValidatorTest {
+public class CorrelationValidatorTest extends ValidatorTest {
     /**
      * Tests valid pattern.
      */
     @Test
     public void testValid() {
         TestBean bean = new TestBean();
-        bean.required1 = "a";
-        bean.required2 = "a";
+        bean.correlation1 = "a";
+        bean.correlation2 = "a";
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
         assertEquals(0, violations.size());
@@ -34,12 +34,12 @@ public class RequiredIfValidatorTest extends ValidatorTest {
     @Test
     public void testInvalid() {
         TestBean bean = new TestBean();
-        bean.required1 = "a";
-        bean.required2 = "b";
+        bean.correlation1 = "a";
+        bean.correlation2 = "b";
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
         assertEquals(1, violations.size());
-        assertEquals("RequiredIf constraint violation. labels: [RequiredIf1, RequiredIf2]", violations.iterator().next().getMessage());
+        assertEquals("CorrelationValid constraint violation. labels: [CorrelationValid1, CorrelationValid2]", violations.iterator().next().getMessage());
     }
 
     /**
@@ -48,24 +48,24 @@ public class RequiredIfValidatorTest extends ValidatorTest {
     @Test
     public void test() {
         TestBean bean = new TestBean();
-        bean.required1 = null;
-        bean.required2 = "b";
+        bean.correlation1 = null;
+        bean.correlation2 = "b";
         Set<ConstraintViolation<TestBean>> violations = validate(bean);
 
         assertEquals(0, violations.size());
     }
 
     private static class TestBean {
-        public String required1;
-        public String required2;
+        public String correlation1;
+        public String correlation2;
 
-        @RequiredIf(message="REQUIREDIF", labels={"label.requiredif1", "label.requiredif2"})
+        @CorrelationValid(message="CORRELATIONVALID", labels={"label.correlationvalid1", "label.correlationvalid2"})
         public boolean isValidMatchPassword() {
-            if (required1 == null || required2 == null) {
+            if (correlation1 == null || correlation2 == null) {
                 return true;
             }
 
-            return required1.equals(required2);
+            return correlation1.equals(correlation2);
         }
     }
 }

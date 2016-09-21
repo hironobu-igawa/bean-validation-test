@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import validation.constraints.validator.RequiredIfValidator;
+import validation.constraints.validator.CorrelationValidator;
 
 /**
  * The annotated method must return true.
@@ -18,9 +18,9 @@ import validation.constraints.validator.RequiredIfValidator;
  */
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy={RequiredIfValidator.class})
+@Constraint(validatedBy={CorrelationValidator.class})
 @Documented
-public @interface RequiredIf {
+public @interface CorrelationValid {
     /**
      * Return the message template key.
      * @return Message template key.

@@ -5,17 +5,17 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import message.MessageResource;
-import validation.constraints.RequiredIf;
+import validation.constraints.CorrelationValid;
 
 /**
  * Verify to return method value that is true.
  * @author hironobu-igawa
  */
-public class RequiredIfValidator implements ConstraintValidator<RequiredIf, Boolean> {
-    private RequiredIf requiredIf;
+public class CorrelationValidator implements ConstraintValidator<CorrelationValid, Boolean> {
+    private CorrelationValid requiredIf;
 
     @Override
-    public void initialize(RequiredIf requiredIf) {
+    public void initialize(CorrelationValid requiredIf) {
         this.requiredIf = requiredIf;
     }
 
